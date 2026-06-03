@@ -552,17 +552,10 @@ async function loadDB() {
 loadDB();
 
 async function saveDB() {
-  try {
-    const res = await fetch('/api/recipes', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(DB)
-    });
-    if (!res.ok) throw new Error();
-    showToast('✅ 已保存');
-  } catch(e) {
-    showToast('⚠️ 保存失败');
-  }
+  showToast('📝 跳转到 GitHub 编辑菜品...');
+  setTimeout(() => {
+    window.open('https://github.com/liyongkuan2018-commits/lunch-picker/edit/main/recipes.json', '_blank');
+  }, 800);
 }
 
 // ===== Toast =====
@@ -697,7 +690,6 @@ async function addItem(key) {
     DB.dinner[key].push(val);
   }
   input.value = '';
-  await saveDB();
   renderEditLists();
 }
 
@@ -708,14 +700,12 @@ async function delItem(key, index) {
   } else {
     DB.dinner[key].splice(index, 1);
   }
-  await saveDB();
   renderEditLists();
 }
 
 async function resetToDefault() {
   if (!confirm('确定要重置所有菜品为默认吗？')) return;
   DB = JSON.parse(JSON.stringify(DEFAULT_DB));
-  await saveDB();
   renderEditLists();
 }
 
