@@ -542,7 +542,7 @@ const STORAGE_KEY = 'lunch-picker-db';
 // ===== API Persistence =====
 async function loadDB() {
   try {
-    const res = await fetch('/api/recipes');
+    const res = await fetch('https://raw.githubusercontent.com/liyongkuan2018-commits/lunch-picker/main/recipes.json');
     if (res.ok) DB = await res.json();
     else DB = JSON.parse(JSON.stringify(DEFAULT_DB));
   } catch(e) {
